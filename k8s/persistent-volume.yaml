@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgis-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 8Gi  # Set the required size
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /home/mp/postgres_data  # Path on the Ubuntu host
