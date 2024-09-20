@@ -1,0 +1,29 @@
+version: '3.9'
+
+
+# networks:
+#   app-tier:
+#     driver: bridge # specify a new network type bridge
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: postgis_db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: mp
+      POSTGRES_DB: global
+      PGDATA: /var/lib/postgresql/data/pgdata  # Specify a subdirectory for database files
+    ports:
+    - 5000:5432
+    volumes:
+     - /home/mp/postgres_data:/var/lib/postgresql/data # Mount your local volume to the container
+    networks:
+      - db-tier  # Connect the service to the app-tier network
+  # adminer:
+  #   image: adminer
+  #   container_name: adminer
+  #   restart: always
+  #   ports:
+  #     - 8000:8080
